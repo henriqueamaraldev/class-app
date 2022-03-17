@@ -9,7 +9,7 @@ export class Teacher {
   name: string;
 
   @Prop({ default: null })
-  subject?: string;
+  subject?: string[];
 
   @Prop()
   createdAt: Date;

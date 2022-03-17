@@ -10,5 +10,6 @@ import { Teacher, TeachersSchema } from './entities/teachers.entity';
   ],
   providers: [TeachersService],
   controllers: [TeachersController],
+  exports: [TeachersService],
 })
 export class TeachersModule {}

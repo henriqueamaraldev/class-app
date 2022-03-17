@@ -8,7 +8,7 @@ export class CreateTeacherDto {
 
   @IsString()
   @IsOptional()
-  subject?: string;
+  subject?: string[];
 }
 
 export class UpdateTeacherDto extends PartialType(CreateTeacherDto) {}

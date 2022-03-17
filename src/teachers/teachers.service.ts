@@ -15,7 +15,9 @@ export class TeachersService {
   }
 
   async listBySubject(subject: string) {
-    const teachers = await this.teacherModel.find({ subject });
+    const teachers = await this.teacherModel.find({
+      subject: { $in: subject },
+    });
     return teachers;
   }
 
@@ -31,7 +33,7 @@ export class TeachersService {
     for (let i = 1; i <= quantity; i++) {
       const teacher = {
         name: 'Teacher' + (i + teachersQuantity),
-        subject: 'Subject' + (i + teachersQuantity),
+        subject: ['Subject' + (i + teachersQuantity)],
       };
       const modelTeacher = new this.teacherModel(teacher);
       await modelTeacher.save();
