@@ -9,7 +9,7 @@ export class ClassesController {
   createClass(@Body() classInput: CreateClassDto) {
     return this.classesService.create(classInput);
   }
-  @Get('/create/:quantity')
+  @Post('/create/:quantity')
   async createMany(@Param('quantity') quantity: number) {
     return this.classesService.createMany(quantity);
   }

@@ -21,15 +21,16 @@ export class StudentsService {
   async createMany(quantity: number) {
     const students = await this.list();
     const studentsQuantity = students.length;
+    const newStudents: CreateStudentDto[] = [];
     for (let i = 1; i <= quantity; i++) {
       const student = {
         name: 'Student' + (i + studentsQuantity),
         email: 'student' + (i + studentsQuantity) + '@gmail.com',
         password: '123456',
       };
-      const modelStudent = new this.studentModel(student);
-      await modelStudent.save();
+      newStudents.push(new this.studentModel(student));
     }
+    await this.studentModel.collection.insertMany(newStudents);
     return 'Concluded';
   }
 }

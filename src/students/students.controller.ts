@@ -9,7 +9,7 @@ export class StudentsController {
   createTeacher(@Body() studentInput: CreateStudentDto) {
     return this.studentsService.create(studentInput);
   }
-  @Get('/create/:quantity')
+  @Post('/create/:quantity')
   async createMany(@Param('quantity') quantity: number) {
     return this.studentsService.createMany(quantity);
   }

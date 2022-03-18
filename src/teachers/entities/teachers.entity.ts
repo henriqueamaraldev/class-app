@@ -5,10 +5,10 @@ export type TeachersDocument = Teacher & Document;
 
 @Schema()
 export class Teacher {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true, unique: true, index: true })
   name: string;
 
-  @Prop({ default: null })
+  @Prop({ default: null, index: true })
   subject?: string[];
 
   @Prop()

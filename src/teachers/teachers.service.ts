@@ -30,14 +30,15 @@ export class TeachersService {
   async createMany(quantity: number) {
     const teachers = await this.list();
     const teachersQuantity = teachers.length;
+    const newTeachers: CreateTeacherDto[] = [];
     for (let i = 1; i <= quantity; i++) {
       const teacher = {
         name: 'Teacher' + (i + teachersQuantity),
         subject: ['Subject' + (i + teachersQuantity)],
       };
-      const modelTeacher = new this.teacherModel(teacher);
-      await modelTeacher.save();
+      newTeachers.push(new this.teacherModel(teacher));
     }
+    await this.teacherModel.collection.insertMany(newTeachers);
     return 'Concluded';
   }
 }

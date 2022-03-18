@@ -5,16 +5,16 @@ export type ClassesDocument = IClass & Document;
 
 @Schema()
 export class IClass {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true, unique: true, index: true })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   subject: string;
 
-  @Prop({ ref: 'Student' })
+  @Prop({ ref: 'Student', index: true })
   students: string[];
 
-  @Prop({ ref: 'Teacher' })
+  @Prop({ ref: 'Teacher', index: true })
   teacher: string;
 
   @Prop()

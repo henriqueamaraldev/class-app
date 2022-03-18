@@ -5,13 +5,13 @@ export type StudentsDocument = Student & Document;
 
 @Schema()
 export class Student {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true, unique: true, index: true })
   name: string;
 
-  @Prop({ default: null })
+  @Prop({ default: null, index: true })
   password: string;
 
-  @Prop({ default: null })
+  @Prop({ default: null, index: true })
   email: string;
 
   @Prop()
