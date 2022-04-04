@@ -30,7 +30,6 @@ export class ClassesService {
 
   async create(inputClass: CreateClassDto) {
     const modelClass = new this.classModel(inputClass);
-
     return await modelClass.save();
   }
 
@@ -39,19 +38,21 @@ export class ClassesService {
     const classesQuantity = classes.length;
     const students = await this.studentsServices.list();
     const teacher = await this.teachersServices.list();
+    const newClasses: CreateClassDto[] = [];
     for (let i = 1; i <= quantity; i++) {
-      const slicerIndex = (i - 1) * 5;
+      const e = i + classesQuantity;
+      const slicerIndex = (e - 1) * 5;
       const classStudens = students.slice(slicerIndex, slicerIndex + 5);
       const classStudentsIds = classStudens.map((student) => student._id);
       const MClass = {
         name: 'Class' + (i + classesQuantity),
         subject: 'Subject' + (i + classesQuantity),
         students: classStudentsIds,
-        teacher: teacher[i - 1]._id,
+        teacher: teacher[e - 1]._id,
       };
-      const modelClass = new this.classModel(MClass);
-      await modelClass.save();
+      newClasses.push(new this.classModel(MClass));
     }
+    await this.classModel.collection.insertMany(newClasses);
     return 'Concluded';
   }
 }
