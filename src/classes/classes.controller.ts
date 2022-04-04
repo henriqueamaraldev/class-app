@@ -6,8 +6,8 @@ import { CreateClassDto } from './dto/create-class.dto';
 export class ClassesController {
   constructor(private readonly classesService: ClassesService) {}
   @Post()
-  createClass(@Body() classInput: CreateClassDto) {
-    return this.classesService.create(classInput);
+  createClass(@Body() payload: CreateClassDto) {
+    return this.classesService.create(payload);
   }
   @Post('/create/:quantity')
   async createMany(@Param('quantity') quantity: number) {
