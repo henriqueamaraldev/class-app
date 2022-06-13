@@ -10,8 +10,8 @@ export class TeachersService {
     @InjectModel(Teacher.name) private teacherModel: Model<TeachersDocument>,
   ) {}
   async list() {
-    const teachers = await this.teacherModel.find();
-    return teachers;
+    const teachers = await this.teacherModel.find(); // 1
+    return teachers; // 1
   }
 
   async listBySubject(subject: string) {

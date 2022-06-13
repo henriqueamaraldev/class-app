@@ -13,12 +13,13 @@ export class ClassesService {
     private studentsServices: StudentsService,
     private teachersServices: TeachersService,
   ) {}
+
   async list() {
     const classes = await this.classModel
       .find()
       .populate('teacher', 'name')
-      .populate('students', 'name');
-    return classes;
+      .populate('students', 'name'); // 1
+    return classes; // 1
   }
 
   async listBySubject(subject: string) {
@@ -34,14 +35,15 @@ export class ClassesService {
   }
 
   async createMany(quantity: number) {
-    const classes = await this.list();
-    const classesQuantity = classes.length;
-    const students = await this.studentsServices.list();
-    const teacher = await this.teachersServices.list();
-    const newClasses: CreateClassDto[] = [];
+    const classes = await this.list(); // 2
+    const classesQuantity = classes.length; // 1
+    const students = await this.studentsServices.list(); // 1
+    const teacher = await this.teachersServices.list(); // 1
+    const newClasses: CreateClassDto[] = []; // 1
     for (let i = 1; i <= quantity; i++) {
-      const e = i + classesQuantity;
-      const slicerIndex = (e - 1) * 5;
+      // x
+      const e = i + classesQuantity; // 1
+      const slicerIndex = (e - 1) * 5; // 1
       const classStudens = students.slice(slicerIndex, slicerIndex + 5);
       const classStudentsIds = classStudens.map((student) => student._id);
       const MClass = {
